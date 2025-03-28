@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="400" viewBox="0 0 500 400">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4cc9f0" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#4361ee" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="500" height="400" fill="url(#bg-gradient)" rx="20" ry="20" />
+  
+  <!-- Central Atom -->
+  <circle cx="250" cy="200" r="50" fill="#4361ee" opacity="0.9" />
+  
+  <!-- Electron Orbits -->
+  <ellipse cx="250" cy="200" rx="120" ry="80" fill="none" stroke="#3a0ca3" stroke-width="2" stroke-dasharray="5,5" transform="rotate(30 250 200)" />
+  <ellipse cx="250" cy="200" rx="150" ry="100" fill="none" stroke="#3a0ca3" stroke-width="2" stroke-dasharray="5,5" transform="rotate(-20 250 200)" />
+  <ellipse cx="250" cy="200" rx="180" ry="120" fill="none" stroke="#3a0ca3" stroke-width="2" stroke-dasharray="5,5" transform="rotate(80 250 200)" />
+  
+  <!-- Electrons -->
+  <circle cx="130" cy="200" r="15" fill="#f72585" />
+  <circle cx="370" cy="200" r="15" fill="#f72585" />
+  <circle cx="250" cy="80" r="15" fill="#f72585" />
+  <circle cx="250" cy="320" r="15" fill="#f72585" />
+  <circle cx="180" cy="120" r="15" fill="#f72585" />
+  <circle cx="320" cy="280" r="15" fill="#f72585" />
+  
+  <!-- Small Habit Icons -->
+  <g transform="translate(125, 195)" fill="white">
+    <path d="M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 Z M15,11 H11 V15 H9 V11 H5 V9 H9 V5 H11 V9 H15 V11 Z" />
+  </g>
+  
+  <g transform="translate(365, 195)" fill="white">
+    <path d="M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 Z M15,11 H5 V9 H15 V11 Z" />
+  </g>
+  
+  <g transform="translate(245, 75)" fill="white">
+    <path d="M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 Z M14.6,7.8 L9.4,13 L5.4,9 L7,7.4 L9.4,9.8 L13,6.2 L14.6,7.8 Z" />
+  </g>
+  
+  <g transform="translate(245, 315)" fill="white">
+    <path d="M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 Z M15,10 C15,12.8 12.8,15 10,15 C7.2,15 5,12.8 5,10 C5,7.2 7.2,5 10,5 C12.8,5 15,7.2 15,10 Z" />
+  </g>
+  
+  <g transform="translate(175, 115)" fill="white">
+    <path d="M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 Z M10,18 C5.6,18 2,14.4 2,10 C2,5.6 5.6,2 10,2 C14.4,2 18,5.6 18,10 C18,14.4 14.4,18 10,18 Z M10,5 L10,10 L15,10 L10,5 Z" />
+  </g>
+  
+  <g transform="translate(315, 275)" fill="white">
+    <path d="M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 Z M14,6 L14,14 L6,14 L6,6 L14,6 Z" />
+  </g>
+  
+  <!-- Growth Chart Line -->
+  <path d="M100,300 Q150,280 180,260 Q210,240 230,200 Q250,160 280,150 Q310,140 350,100" fill="none" stroke="#4cc9f0" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- 1% Better Text -->
+  <text x="250" y="40" font-family="Arial" font-size="18" font-weight="bold" fill="#3a0ca3" text-anchor="middle">1% MELHOR CADA DIA</text>
+  
+  <!-- Atomic Habits Text -->
+  <text x="250" y="370" font-family="Arial" font-size="24" font-weight="bold" fill="#3a0ca3" text-anchor="middle">HÁBITOS ATÔMICOS</text>
+</svg>
