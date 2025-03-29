@@ -673,19 +673,20 @@ footer {
 @media (max-width: 480px) {
     .calendar {
         grid-template-columns: repeat(7, 1fr);
-        gap: 1px;
+        gap: 4px;
+        padding: 5px;
     }
     
     .calendar-day {
-        padding: 3px;
-        font-size: 0.7rem;
+        padding: 5px;
+        font-size: 0.8rem;
     }
     
     .calendar-date {
-        padding: 5px 3px;
-        font-size: 0.8rem;
-        min-width: 25px;
-        min-height: 25px;
+        padding: 8px;
+        font-size: 0.9rem;
+        min-width: 35px;
+        min-height: 35px;
     }
 }
 
@@ -704,15 +705,42 @@ footer {
     justify-content: center;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     touch-action: manipulation;
+    user-select: none;
+    position: relative;
+    z-index: 1;
 }
 
 .calendar-date:active {
-    background-color: var(--light-gray);
+    background-color: var(--primary-color);
+    color: white;
     transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a pseudo-element to increase touch target area */
+.calendar-date::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
 }
 
 .calendar-date:hover {
     background-color: var(--light-gray);
+}
+
+@media (hover: none) {
+    /* Special styles for touch devices */
+    .calendar-date {
+        margin: 2px;
+    }
+    
+    .calendar-date:hover {
+        background-color: white; /* Prevent hover state on touch devices */
+    }
 }
 
 .calendar-date.completed {
