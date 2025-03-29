@@ -128,74 +128,7 @@ function generateToolsPDF() {
                 yPosition += 20;
             });
             
-            // Adicionar calendário de progresso se houver completions
-            if (Object.keys(habitCompletions).length > 0) {
-                addPageIfNeeded(30);
-                
-                pdf.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2], 0.1);
-                pdf.rect(margin, yPosition, contentWidth, 10, 'F');
-                
-                pdf.setFontSize(14);
-                pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-                pdf.text('Progresso Recente', margin + 5, yPosition + 7);
-                yPosition += 15;
-                
-                // Mostrar dias com hábitos completos nos últimos 30 dias
-                const today = new Date();
-                const last30Days = [];
-                
-                for (let i = 0; i < 30; i++) {
-                    const date = new Date(today);
-                    date.setDate(today.getDate() - i);
-                    const dateStr = date.toISOString().split('T')[0];
-                    
-                    const completedHabits = habitCompletions[dateStr] || [];
-                    const completionRate = habits.length > 0 ? 
-                        Math.round((completedHabits.length / habits.length) * 100) : 0;
-                    
-                    last30Days.unshift({
-                        date: date,
-                        dateStr: dateStr,
-                        completedCount: completedHabits.length,
-                        completionRate: completionRate
-                    });
-                }
-                
-                // Desenhar gráfico de barras horizontal
-                const barHeight = 5;
-                const barSpacing = 8;
-                const maxBarWidth = contentWidth - 50;
-                
-                last30Days.slice(0, 10).forEach((day, index) => {
-                    addPageIfNeeded(barSpacing);
-                    
-                    const dayName = day.date.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit' });
-                    pdf.setFontSize(8);
-                    pdf.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-                    pdf.text(dayName, margin, yPosition + 4);
-                    
-                    const barWidth = (day.completionRate / 100) * maxBarWidth;
-                    
-                    // Barra de fundo
-                    pdf.setFillColor(grayColor[0], grayColor[1], grayColor[2], 0.2);
-                    pdf.rect(margin + 30, yPosition, maxBarWidth, barHeight, 'F');
-                    
-                    // Barra de progresso
-                    if (barWidth > 0) {
-                        pdf.setFillColor(successColor[0], successColor[1], successColor[2]);
-                        pdf.rect(margin + 30, yPosition, barWidth, barHeight, 'F');
-                    }
-                    
-                    // Porcentagem
-                    pdf.setFontSize(8);
-                    pdf.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-                    pdf.text(`${day.completionRate}%`, margin + 30 + maxBarWidth + 5, yPosition + 4);
-                    
-                    yPosition += barSpacing;
-                });
-                
-                yPosition += 10;
-            }
+            // Progresso recente foi removido junto com o calendário
         }
 
         // Adicionar seção de intenções de implementação

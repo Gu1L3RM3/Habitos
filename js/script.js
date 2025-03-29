@@ -213,7 +213,6 @@ function initHabitTracker() {
             if (confirm('Tem certeza que deseja excluir este hábito?')) {
                 habitItem.remove();
                 saveHabits();
-                updateCalendar();
             }
         });
     }
@@ -230,7 +229,6 @@ function initHabitTracker() {
             });
         });
         localStorage.setItem('habits', JSON.stringify(habits));
-        updateCalendar();
     }
 
     // Carregar hábitos do localStorage
@@ -239,119 +237,14 @@ function initHabitTracker() {
         habits.forEach(habit => {
             addHabit(habit.name, habit.category, habit.color);
         });
-        loadCompletions();
-        updateCalendar();
     }
 
-    // Atualizar calendário
-    function updateCalendar() {
-        if (!calendarContainer) return;
-
-        calendarContainer.innerHTML = '';
-
-        // Adicionar cabeçalho dos dias da semana
-        const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-        weekdays.forEach(day => {
-            const dayElement = document.createElement('div');
-            dayElement.className = 'calendar-day';
-            dayElement.textContent = day;
-            calendarContainer.appendChild(dayElement);
-        });
-
-        // Obter data atual
-        const today = new Date();
-        const currentMonth = today.getMonth();
-        const currentYear = today.getFullYear();
-
-        // Obter primeiro dia do mês e total de dias
-        const firstDay = new Date(currentYear, currentMonth, 1);
-        const lastDay = new Date(currentYear, currentMonth + 1, 0);
-        const totalDays = lastDay.getDate();
-
-        // Adicionar dias vazios até o primeiro dia do mês
-        for (let i = 0; i < firstDay.getDay(); i++) {
-            const emptyDay = document.createElement('div');
-            emptyDay.className = 'calendar-date empty';
-            calendarContainer.appendChild(emptyDay);
-        }
-
-        // Adicionar dias do mês
-        const completions = getCompletions();
-
-        for (let day = 1; day <= totalDays; day++) {
-            const date = new Date(currentYear, currentMonth, day);
-            const dateString = formatDate(date);
-            const dateElement = document.createElement('div');
-            dateElement.className = 'calendar-date';
-            dateElement.textContent = day;
-            dateElement.dataset.date = dateString;
-
-            // Marcar dia atual
-            if (day === today.getDate()) {
-                dateElement.classList.add('today');
-            }
-
-            // Verificar se há hábitos completados neste dia
-            const dayCompletions = completions[dateString] || [];
-            const habits = document.querySelectorAll('.habit-item');
-            let allCompleted = habits.length > 0;
-
-            habits.forEach(habit => {
-                if (!dayCompletions.includes(habit.dataset.id)) {
-                    allCompleted = false;
-                }
-            });
-
-            if (allCompleted && habits.length > 0) {
-                dateElement.classList.add('completed');
-            }
-
-            // Adicionar evento de clique para marcar/desmarcar hábitos
-            dateElement.addEventListener('click', function() {
-                toggleHabitsForDate(dateString);
-            });
-
-            calendarContainer.appendChild(dateElement);
-        }
-    }
-
-    // Formatar data como YYYY-MM-DD
+    // Função para formatar data como YYYY-MM-DD (mantida para compatibilidade)
     function formatDate(date) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
-    }
-
-    // Alternar conclusão de hábitos para uma data
-    function toggleHabitsForDate(dateString) {
-        const completions = getCompletions();
-        const dateCompletions = completions[dateString] || [];
-        const habits = document.querySelectorAll('.habit-item');
-        const dateElement = document.querySelector(`.calendar-date[data-date="${dateString}"]`);
-
-        // Verificar se todos os hábitos estão completos
-        let allCompleted = habits.length > 0;
-        habits.forEach(habit => {
-            if (!dateCompletions.includes(habit.dataset.id)) {
-                allCompleted = false;
-            }
-        });
-
-        // Se todos estiverem completos, desmarcar todos; caso contrário, marcar todos
-        if (allCompleted) {
-            completions[dateString] = [];
-            dateElement.classList.remove('completed');
-        } else {
-            completions[dateString] = Array.from(habits).map(habit => habit.dataset.id);
-            dateElement.classList.add('completed');
-        }
-
-        // Salvar completions
-        localStorage.setItem('habitCompletions', JSON.stringify(completions));
-        
-        // Atualizar o calendário para refletir as mudanças
-        updateCalendar();
     }
 
     // Obter completions do localStorage
